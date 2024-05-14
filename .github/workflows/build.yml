@@ -32,12 +32,12 @@ jobs:
         role-to-assume: arn:aws:iam::339712877925:role/CodeDeployRole
         role-session-name: Github-deployment
         aws-region: us-east-1
-    - name: Count files in S3 folder
+    - name: count file
       id: count_files
       run: |
           file_count=$(aws s3 ls s3://testwar-viky/Artifacts/DotNet/ --recursive | wc -l)
           echo "Number of files in S3 folder: $file_count"
-          echo "{CURRENT_PACKAGE}={$filecount+1}" >> $GITHUB_OUTPUT
+          echo "CURRENT_PACKAGE=$file_count" >> $GITHUB_ENV
     - name: Upload File to S3
       run: |
           aws s3 cp App*.zip s3://testwar-viky/Artifacts/DotNet/App-${CURRENT_PACKAGE}.zip
