@@ -20,3 +20,15 @@ jobs:
     
     - name: Test with dotnet
       run: dotnet test ./eShopOnWeb.sln --configuration Release
+    - name: zip the build files
+      run:
+        zip -r App1.zip ./src/ApplicationCore/bin/Release/net8.0
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::339712877925:role/CodeDeployRole
+        role-session-name: Github-deployment
+        aws-region: us-east-1
+    - name: Upload File to S3
+      run: |
+          aws s3 cp App*.zip s3://testwar-viky/Artifacts/
