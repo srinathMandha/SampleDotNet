@@ -17,7 +17,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '8.0.x'
-        include-prerelease: true
 
     - name: Build with dotnet
       run: dotnet build ./eShopOnWeb.sln --configuration Release
@@ -33,6 +32,13 @@ jobs:
         role-to-assume: arn:aws:iam::339712877925:role/CodeDeployRole
         role-session-name: Github-deployment
         aws-region: us-east-1
+    - name: Count files in S3 folder
+      id: count_files
+      run: |
+          file_count=$(aws s3 ls s3://testwar-viky/Artifacts/DotNet/ --recursive | wc -l)
+          echo "Number of files in S3 folder: $file_count"
+          echo "::set-output name=current_package::$file_count+1"
     - name: Upload File to S3
       run: |
-          aws s3 cp App*.zip s3://testwar-viky/Artifacts/
+          aws s3 cp App*.zip s3://testwar-viky/Artifacts/DotNet/App-$current_package.zip
+          aws s3api put-object-tagging --bucket testwar-viky --key Artifacts/DotNet/App-$current_package.zip --tagging 'TagSet=[{Key=Value,Value=Deployable}]'
