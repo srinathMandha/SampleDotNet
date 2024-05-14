@@ -1,0 +1,28 @@
+name: eShopOnWeb Build and Test
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+   - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::339712877925:role/CodeDeployRole
+        role-session-name: Github-deployment
+        aws-region: us-east-1
+    - name: Count files in S3 folder
+      id: count_files
+      run: |
+          file_count=$(aws s3 ls s3://testwar-viky/Artifacts/DotNet/ --recursive | wc -l)
+          echo "Number of files in S3 folder: $file_count"
+          echo "{CURRENT_PACKAGE}={$filecount+1}" >> $GITHUB_OUTPUT
+
+    - name: Output Test
+      run: |
+        echo $CURRENT_PACKAGE
