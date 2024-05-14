@@ -1,4 +1,4 @@
-name: eShopOnWeb Build and Test
+name: Version Test
 
 on: [workflow_dispatch]
 
@@ -21,9 +21,9 @@ jobs:
        run: |
           file_count=$(aws s3 ls s3://testwar-viky/Artifacts/DotNet/ --recursive | wc -l)
           echo "Number of files in S3 folder: $file_count"
-          echo "current_package=$filecount+1" >> $GITHUB_ENV
+          echo "current_package=${{ filecount+1 }} >> $GITHUB_ENV
      - name: count file
        run: |
           echo $CURRENT_PACKAGE
-          echo" aws s3 cp App*.zip s3://testwar-viky/Artifacts/DotNet/App-${CURRENT_PACKAGE}.zip"
+          echo  "aws s3 cp App*.zip s3://testwar-viky/Artifacts/DotNet/App-${CURRENT_PACKAGE}.zip"
         
