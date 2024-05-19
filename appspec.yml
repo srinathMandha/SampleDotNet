@@ -13,6 +13,6 @@ hooks:
   #   - location: .github/scripts/download_file_from_s3.sh
   #     timeout: 300
   #     runas: Administrator
-    - location: .github/scripts/start_apppool.sh
+    - location: .github/scripts/start_apppool.cmd
       timeout: 300
       runas: Administrator
