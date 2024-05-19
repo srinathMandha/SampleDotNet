@@ -9,7 +9,7 @@ hooks:
     - location: .github/scripts/stop_apppool.cmd
       timeout: 300
       runas: Administrator
-  # AfterInstall:
+  AfterInstall:
   #   - location: .github/scripts/download_file_from_s3.sh
   #     timeout: 300
   #     runas: Administrator
