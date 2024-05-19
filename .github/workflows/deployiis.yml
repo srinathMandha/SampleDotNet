@@ -24,7 +24,7 @@ jobs:
           echo "Creating CodeDeploy deployment..."
           DEPLOYMENT_ID=$(aws deploy create-deployment \
                           --application-name IISStopApp \
-                          --deployment-group-name IISGroup \
+                          --deployment-group-name IISAppDeployment \
                           --deployment-config-name CodeDeployDefault.OneAtATime \
                           --github-location repository=${{ github.repository }},commitId=${{ github.sha }} \
                           --query "deploymentId" --output text)
