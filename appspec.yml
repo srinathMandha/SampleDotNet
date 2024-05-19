@@ -1,0 +1,18 @@
+version: 0.0
+os: windows
+files:
+  - source: /
+    destination: C:\inetpub\wwwroot
+
+hooks:
+  BeforeInstall:
+    - location: .github/scripts/stop_apppool.cmd
+      timeout: 300
+      runas: Administrator
+  # AfterInstall:
+  #   - location: .github/scripts/download_file_from_s3.sh
+  #     timeout: 300
+  #     runas: Administrator
+    - location: .github/scripts/start_apppool.sh
+      timeout: 300
+      runas: Administrator
