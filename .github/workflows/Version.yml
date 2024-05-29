@@ -25,5 +25,5 @@ jobs:
      - name: count file
        run: |
           echo $CURRENT_PACKAGE
-          echo  "aws s3 cp App*.zip s3://testwar-viky/Artifacts/DotNet/App-${CURRENT_PACKAGE}.zip"
+          echo  "aws s3 cp appspec.yml  s3://testwar-viky/Artifacts/App-${CURRENT_PACKAGE}.yml"
         
