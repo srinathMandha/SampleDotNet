@@ -21,7 +21,7 @@ jobs:
      - name: count file
        id: count_files
        run: |
-          file_count=$(aws s3 ls $S3_PATH --recursive | wc -l)
+          file_count=$(aws s3 ls $S3_PATH  | wc -l)
           file_count=$(($file_count - 1))
           echo "Number of files in S3 folder: $file_count"
           echo "CURRENT_PACKAGE=$file_count" >> $GITHUB_ENV
