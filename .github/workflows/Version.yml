@@ -28,6 +28,7 @@ jobs:
      - name: count file
        run: |
           echo $CURRENT_PACKAGE
+          ls -ltrh
           echo  "aws s3 cp appspec.yml  s3://testwar-viky/Artifacts/App-${CURRENT_PACKAGE}.yml"
           aws s3 cp appspec.yml  s3://testwar-viky/Artifacts/App-${CURRENT_PACKAGE}.yml
           aws s3 cp appspec.yml  s3://testwar-viky/Artifacts/App-${CURRENT_PACKAGE}.yml
