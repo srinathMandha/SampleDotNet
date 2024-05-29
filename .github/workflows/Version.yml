@@ -25,12 +25,13 @@ jobs:
           file_count=$(($file_count - 1))
           echo "Number of files in S3 folder: $file_count"
           echo "CURRENT_PACKAGE=$file_count" >> $GITHUB_ENV
-     - name: count file
+     - name: Upload to the Artifactory
        run: |
           echo $CURRENT_PACKAGE
           echo "Test" >> appspec.yml
           ls -ltrh
           echo  "aws s3 cp appspec.yml  s3://testwar-viky/Artifacts/App-${CURRENT_PACKAGE}.yml"
           aws s3 cp appspec.yml  s3://testwar-viky/Artifacts/App-${CURRENT_PACKAGE}.yml
+          aws s3 rm s3://testwar-viky/Artifacts/latest/ --recursive
           aws s3 cp appspec.yml  s3://testwar-viky/Artifacts/latest/App-${CURRENT_PACKAGE}.yml
         
