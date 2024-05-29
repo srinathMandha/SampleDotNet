@@ -19,7 +19,7 @@ jobs:
      - name: count file
        id: count_files
        run: |
-          file_count=$(aws s3 ls s3://testwar-viky/Artifacts/DotNet/ --recursive | wc -l)
+          file_count=$(aws s3 ls s3://testwar-viky/Artifacts/ --recursive | wc -l)
           echo "Number of files in S3 folder: $file_count"
           echo "CURRENT_PACKAGE=$file_count" >> $GITHUB_ENV
      - name: count file
