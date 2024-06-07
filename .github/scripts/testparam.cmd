@@ -9,4 +9,4 @@ if "%AppPoolName%"=="" (
     echo Failed to retrieve the application pool name from the parameter store.
     exit /b 1
 )
-echo "%ParamStoreKey%"
+echo "%AppPoolName%"
