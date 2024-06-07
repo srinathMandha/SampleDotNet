@@ -21,5 +21,20 @@ jobs:
           aws-region: us-east-1
       - name: update param
         run: aws ssm put-parameter --name "FYTC_Current_Deploying_App" --value "${{ github.event.inputs.param_value }}" --type "String" --overwrite
+  param_retrieve:
+    runs-on: windows-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      # Step 1: Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::339712877925:role/CodeDeployRole
+          aws-region: us-east-1
+
+      - name: Run sh
+        run: .github\scripts\testparam.cmd
 
       
