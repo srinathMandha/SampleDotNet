@@ -3,7 +3,7 @@ name: Param Reteieve cmd
 on:
   workflow_dispatch: 
 jobs:
-    param_retrieve:
+  param_retrieve:
     runs-on: windows-latest
     permissions:
       id-token: write
