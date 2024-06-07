@@ -1,4 +1,4 @@
-name: CodeDeploy Test 
+name: Param Test 
 
 on:
   workflow_dispatch:  
